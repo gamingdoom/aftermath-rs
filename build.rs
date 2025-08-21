@@ -1,5 +1,3 @@
-#![feature(fs_try_exists)]
-
 use std::{ffi::OsString, io::Write};
 
 fn get_lib_name() -> &'static str {
@@ -47,7 +45,7 @@ fn get_download_name() -> &'static [&'static str] {
 
 fn main() {
     for (download_name, install_path) in get_install_path() {
-        if !std::fs::try_exists(&install_path).expect("Unable to check library file location") {
+        if !std::fs::exists(&install_path).expect("Unable to check library file location") {
             let data = sysreq::get(format!(
                 "https://github.com/dust-engine/aftermath-rs/releases/download/v0.1/{}",
                 download_name
